@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Smartphone Samsung Galaxy",
+    "price": 5999000,
+    "description": "Smartphone flagship dengan kamera terbaik dan performa tinggi",
+    "image": "/images/products/phone1.jpg",
+    "category": "Electronics",
+    "stock": 10,
+    "featured": true
+  },
+  {
+    "id": 2,
+    "name": "Laptop Gaming ASUS ROG",
+    "price": 15999000,
+    "description": "Laptop gaming dengan spesifikasi tinggi untuk para gamer",
+    "image": "/images/products/laptop1.jpg",
+    "category": "Electronics",
+    "stock": 5,
+    "featured": true
+  },
+  {
+    "id": 3,
+    "name": "Sepatu Sneakers Premium",
+    "price": 899000,
+    "description": "Sepatu sneakers dengan kualitas premium dan design modern",
+    "image": "/images/products/shoes1.jpg",
+    "category": "Fashion",
+    "stock": 20,
+    "featured": false
+  },
+  {
+    "id": 4,
+    "name": "Jam Tangan Smart Watch",
+    "price": 2499000,
+    "description": "Smart watch dengan fitur kesehatan dan notifikasi lengkap",
+    "image": "/images/products/watch1.jpg",
+    "category": "Electronics",
+    "stock": 15,
+    "featured": true
+  }
+]

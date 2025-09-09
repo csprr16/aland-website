@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "email": "admin@alandstore.com",
+    "password": "$2b$10$sWWYFaeELdlkomwzeuOkQudGe9CFhhzPmbtosZuOR11pMEJmKNqE6",
+    "fullName": "Administrator",
+    "role": "admin",
+    "createdAt": "2025-09-09T04:11:09.813Z"
+  },
+  {
+    "id": 2,
+    "username": "user",
+    "email": "user@alandstore.com",
+    "password": "$2b$10$8Pa8qm.neQyBPmdcMFwwh.tLG2VJHWVxANeA0pFKavRwjqBDFdqNS",
+    "fullName": "Demo User",
+    "role": "user",
+    "createdAt": "2025-09-09T04:11:09.813Z"
+  },
+  {
+    "id": 3,
+    "username": "aland",
+    "email": "kei.rani.ang.l.yt@gmail.com",
+    "password": "$2b$10$8vUlakzn.UpmhphtP.qxTu1zsARALsT58xMSrUlTnivBbkWbDpcLu",
+    "fullName": "casper",
+    "role": "user",
+    "createdAt": "2025-09-09T04:14:58.695Z"
+  }
+]
