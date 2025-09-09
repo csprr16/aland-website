@@ -1,0 +1,70 @@
+{
+  "name": "alandstore-ecommerce",
+  "version": "1.0.0",
+  "description": "AlandStore - Modern e-commerce website with Netlify functions backend by alandyudhistira 2025",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "netlify dev",
+    "dev:backend": "nodemon backend/server.js",
+    "build": "echo 'No build step required for static site'",
+    "functions:dev": "netlify functions:serve",
+    "functions:build": "netlify functions:build",
+    "deploy": "netlify deploy",
+    "deploy:prod": "netlify deploy --prod",
+    "env:generate": "node scripts/generate-env.js",
+    "env:validate": "node scripts/validate-env.js",
+    "env:validate:local": "node scripts/validate-env.js --local",
+    "env:netlify:setup": "bash scripts/netlify-env-commands.sh",
+    "test": "echo 'Tests not implemented yet'",
+    "lint": "echo 'Linting not configured yet'"
+  },
+  "keywords": [
+    "ecommerce",
+    "netlify",
+    "serverless",
+    "functions",
+    "online-store",
+    "alandyudhistira",
+    "javascript",
+    "modern-web"
+  ],
+  "author": "alandyudhistira",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alandyudhistira/alandstore"
+  },
+  "homepage": "https://alandstore.netlify.app",
+  "bugs": {
+    "url": "https://github.com/alandyudhistira/alandstore/issues"
+  },
+  "netlify": {
+    "functions": {
+      "directory": "netlify/functions"
+    }
+  }
+}
