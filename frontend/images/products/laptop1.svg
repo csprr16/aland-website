@@ -1,0 +1,69 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="laptopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a202c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d3748;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8f9ff"/>
+  
+  <!-- Laptop base -->
+  <rect x="50" y="240" width="300" height="20" rx="10" ry="10" fill="url(#laptopGrad)"/>
+  <rect x="60" y="230" width="280" height="30" rx="8" ry="8" fill="#4a5568"/>
+  
+  <!-- Laptop screen back -->
+  <rect x="70" y="80" width="260" height="170" rx="12" ry="12" fill="url(#laptopGrad)"/>
+  
+  <!-- Screen -->
+  <rect x="85" y="95" width="230" height="140" rx="8" ry="8" fill="#000"/>
+  
+  <!-- Screen content -->
+  <rect x="85" y="95" width="230" height="140" rx="8" ry="8" fill="url(#screenGrad)"/>
+  
+  <!-- Gaming elements on screen -->
+  <text x="200" y="130" font-family="Inter, sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#fff">ASUS ROG</text>
+  <text x="200" y="150" font-family="Inter, sans-serif" font-size="10" text-anchor="middle" fill="#fff">GAMING</text>
+  
+  <!-- Gaming icons -->
+  <circle cx="170" cy="170" r="8" fill="#ff4757"/>
+  <circle cx="190" cy="170" r="8" fill="#2ed573"/>
+  <circle cx="210" cy="170" r="8" fill="#ffa502"/>
+  <circle cx="230" cy="170" r="8" fill="#667eea"/>
+  
+  <!-- Performance bars -->
+  <rect x="120" y="185" width="40" height="4" rx="2" fill="#2ed573"/>
+  <rect x="120" y="195" width="60" height="4" rx="2" fill="#ffa502"/>
+  <rect x="120" y="205" width="50" height="4" rx="2" fill="#ff4757"/>
+  
+  <!-- Keyboard -->
+  <rect x="80" y="235" width="240" height="15" rx="4" ry="4" fill="#2d3748"/>
+  
+  <!-- Keys -->
+  <g fill="#4a5568">
+    <rect x="90" y="240" width="8" height="6" rx="1"/>
+    <rect x="105" y="240" width="8" height="6" rx="1"/>
+    <rect x="120" y="240" width="8" height="6" rx="1"/>
+    <rect x="135" y="240" width="8" height="6" rx="1"/>
+    <rect x="150" y="240" width="8" height="6" rx="1"/>
+    <rect x="165" y="240" width="8" height="6" rx="1"/>
+    <rect x="180" y="240" width="8" height="6" rx="1"/>
+    <rect x="195" y="240" width="8" height="6" rx="1"/>
+    <rect x="210" y="240" width="8" height="6" rx="1"/>
+    <rect x="225" y="240" width="8" height="6" rx="1"/>
+    <rect x="240" y="240" width="8" height="6" rx="1"/>
+    <rect x="255" y="240" width="8" height="6" rx="1"/>
+    <rect x="270" y="240" width="8" height="6" rx="1"/>
+    <rect x="285" y="240" width="8" height="6" rx="1"/>
+    <rect x="300" y="240" width="8" height="6" rx="1"/>
+  </g>
+  
+  <!-- Trackpad -->
+  <rect x="180" y="235" width="40" height="20" rx="4" ry="4" fill="#1a202c"/>
+  
+  <text x="200" y="290" font-family="Inter, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#667eea">ASUS ROG Gaming</text>
+  <text x="200" y="310" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#666">High Performance Laptop</text>
+</svg>

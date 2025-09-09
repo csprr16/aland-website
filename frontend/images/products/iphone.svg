@@ -1,0 +1,63 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iphoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a4a4a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iphoneScreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5856D6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8f9ff"/>
+  
+  <!-- iPhone outline -->
+  <rect x="150" y="50" width="100" height="200" rx="25" ry="25" fill="url(#iphoneGrad)" stroke="#000" stroke-width="1"/>
+  
+  <!-- Screen -->
+  <rect x="160" y="70" width="80" height="140" rx="15" ry="15" fill="#000"/>
+  <rect x="160" y="70" width="80" height="140" rx="15" ry="15" fill="url(#iphoneScreen)" opacity="0.8"/>
+  
+  <!-- Dynamic Island -->
+  <rect x="180" y="75" width="40" height="8" rx="4" ry="4" fill="#000"/>
+  
+  <!-- Home indicator -->
+  <rect x="190" y="225" width="20" height="3" rx="1.5" ry="1.5" fill="#fff" opacity="0.6"/>
+  
+  <!-- Screen content -->
+  <text x="200" y="120" font-family="Inter, sans-serif" font-size="10" font-weight="700" text-anchor="middle" fill="#fff">iPhone 15</text>
+  <text x="200" y="135" font-family="Inter, sans-serif" font-size="8" text-anchor="middle" fill="#fff">Pro Max</text>
+  
+  <!-- App icons -->
+  <g fill="#fff" opacity="0.9">
+    <rect x="170" y="145" width="12" height="12" rx="2" fill="#FF3B30"/>
+    <rect x="185" y="145" width="12" height="12" rx="2" fill="#007AFF"/>
+    <rect x="200" y="145" width="12" height="12" rx="2" fill="#34C759"/>
+    <rect x="215" y="145" width="12" height="12" rx="2" fill="#FF9500"/>
+    
+    <rect x="170" y="162" width="12" height="12" rx="2" fill="#5856D6"/>
+    <rect x="185" y="162" width="12" height="12" rx="2" fill="#FF2D92"/>
+    <rect x="200" y="162" width="12" height="12" rx="2" fill="#8E8E93"/>
+    <rect x="215" y="162" width="12" height="12" rx="2" fill="#30D158"/>
+  </g>
+  
+  <!-- Camera system -->
+  <rect x="165" y="55" width="25" height="25" rx="5" ry="5" fill="#2d3748"/>
+  <circle cx="170" cy="65" r="6" fill="#1a202c"/>
+  <circle cx="170" cy="65" r="4" fill="#4a5568"/>
+  <circle cx="183" cy="65" r="6" fill="#1a202c"/>
+  <circle cx="183" cy="65" r="4" fill="#4a5568"/>
+  <circle cx="177" cy="75" r="4" fill="#1a202c"/>
+  <circle cx="177" cy="75" r="2" fill="#4a5568"/>
+  
+  <!-- Side buttons -->
+  <rect x="148" y="90" width="2" height="15" rx="1" ry="1" fill="#2d3748"/>
+  <rect x="148" y="110" width="2" height="8" rx="1" ry="1" fill="#2d3748"/>
+  <rect x="148" y="125" width="2" height="8" rx="1" ry="1" fill="#2d3748"/>
+  
+  <!-- Charging port -->
+  <rect x="195" y="245" width="10" height="3" rx="1.5" ry="1.5" fill="#2d3748"/>
+  
+  <text x="200" y="290" font-family="Inter, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#007AFF">iPhone 15 Pro Max</text>
+  <text x="200" y="310" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#666">Latest iPhone Technology</text>
+</svg>

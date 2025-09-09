@@ -1,0 +1,17 @@
+# Redirect API routes to Netlify functions
+/api/login          /.netlify/functions/login          200
+/api/register       /.netlify/functions/register       200
+/api/products       /.netlify/functions/products       200
+/api/products-create /.netlify/functions/products-create 200
+/api/products-manage/* /.netlify/functions/products-manage/:splat 200
+/api/orders         /.netlify/functions/orders         200
+/api/orders-create  /.netlify/functions/orders-create  200
+/api/orders-manage/* /.netlify/functions/orders-manage/:splat 200
+
+# Redirect old routes to new structure
+/login              /pages/login.html                  200
+/register           /pages/register.html               200  
+/admin              /pages/admin.html                  200
+
+# SPA fallback
+/*                  /index.html                        200

@@ -1,0 +1,12 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f8f9fa"/>
+  <g fill="#dee2e6" font-family="Inter, sans-serif" font-size="18" font-weight="600" text-anchor="middle">
+    <text x="50%" y="45%">AlandStore</text>
+    <text x="50%" y="55%" font-size="14" font-weight="400">Placeholder Image</text>
+  </g>
+  <g stroke="#dee2e6" stroke-width="2" fill="none">
+    <rect x="80" y="120" width="240" height="160" rx="8"/>
+    <circle cx="130" cy="160" r="12"/>
+    <path d="m160 200 40-40 80 80H160z"/>
+  </g>
+</svg>

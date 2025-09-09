@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AlandStore</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <h2>🛍️ AlandStore</h2>
+                    <span class="nav-subtitle">by alandyudhistira 2025</span>
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="/" class="btn btn-outline">
+                    <i class="fas fa-home"></i>
+                    Beranda
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Selamat Datang Kembali</h2>
+            <p>Masuk ke akun AlandStore Anda</p>
+        </div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            
+            <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: #666;">
+                    <input type="checkbox" id="remember-me">
+                    Ingat saya
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Masuk</span>
+                <i class="fas fa-spinner fa-spin" id="login-spinner" style="display: none;"></i>
+            </button>
+        </form>
+        
+        <div class="form-link">
+            <p>Belum punya akun? <a href="/register">Daftar di sini</a></p>
+        </div>
+        
+        <!-- Demo Account Info -->
+        <div style="margin-top: 32px; padding: 20px; background: #f8f9ff; border-radius: 12px; border-left: 4px solid #667eea;">
+            <h4 style="margin-bottom: 12px; color: #333; font-size: 16px;">Demo Account:</h4>
+            <div style="font-size: 14px; color: #666; line-height: 1.5;">
+                <p><strong>Admin:</strong> admin@alandstore.com / admin123</p>
+                <p><strong>User:</strong> user@alandstore.com / user123</p>
+                <p style="margin-top: 8px; font-style: italic;">* Gunakan akun demo untuk testing fitur</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <!-- Load configuration and API client first -->
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script>
+        // Check if already logged in
+        if (API.isAuthenticated()) {
+            window.location.href = '../index.html';
+        }
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('login-btn');
+            const loginSpinner = document.getElementById('login-spinner');
+            const btnText = loginBtn.querySelector('span');
+            
+            // Show loading state
+            loginBtn.disabled = true;
+            loginSpinner.style.display = 'inline-block';
+            btnText.textContent = 'Memproses...';
+            
+            try {
+                const result = await API.login(email, password);
+                
+                showNotification('Login berhasil! Mengalihkan...', 'success');
+                
+                setTimeout(() => {
+                    // Redirect based on role
+                    const user = API.getCurrentUser();
+                    if (user && user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = '../index.html';
+                    }
+                }, 1500);
+            } catch (error) {
+                console.error('Login error:', error);
+                showNotification(error.message || 'Login gagal', 'error');
+            } finally {
+                // Reset button state
+                loginBtn.disabled = false;
+                loginSpinner.style.display = 'none';
+                btnText.textContent = 'Masuk';
+            }
+        });
+
+        // Demo account quick login
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add click handlers for demo account info
+            const demoInfo = document.querySelector('[style*="background: #f8f9ff"]');
+            if (demoInfo) {
+                const adminP = demoInfo.querySelector('p:first-of-type');
+                const userP = demoInfo.querySelector('p:nth-of-type(2)');
+                
+                adminP.style.cursor = 'pointer';
+                userP.style.cursor = 'pointer';
+                adminP.title = 'Klik untuk auto-fill';
+                userP.title = 'Klik untuk auto-fill';
+                
+                adminP.addEventListener('click', () => {
+                    document.getElementById('email').value = 'admin@alandstore.com';
+                    document.getElementById('password').value = 'admin123';
+                });
+                
+                userP.addEventListener('click', () => {
+                    document.getElementById('email').value = 'user@alandstore.com';
+                    document.getElementById('password').value = 'user123';
+                });
+            }
+        });
+
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const messageEl = notification.querySelector('.notification-message');
+            const iconEl = notification.querySelector('.notification-icon');
+            
+            messageEl.textContent = message;
+            notification.className = `notification ${type}`;
+            
+            const icons = {
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle',
+                info: 'fas fa-info-circle'
+            };
+            
+            iconEl.className = `notification-icon ${icons[type] || icons.info}`;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shoeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="soleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d3748;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a202c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#f8f9ff"/>
+  
+  <!-- Sole -->
+  <ellipse cx="200" cy="260" rx="120" ry="30" fill="url(#soleGrad)"/>
+  <ellipse cx="200" cy="255" rx="115" ry="25" fill="#4a5568"/>
+  
+  <!-- Shoe body -->
+  <path d="M 100 200 Q 100 150 150 130 Q 200 120 250 130 Q 300 150 300 200 Q 300 230 280 240 L 120 240 Q 100 230 100 200 Z" fill="url(#shoeGrad)"/>
+  
+  <!-- Shoe details -->
+  <path d="M 120 180 Q 150 170 200 170 Q 250 170 280 180" stroke="#fff" stroke-width="2" fill="none"/>
+  <path d="M 130 200 Q 160 190 200 190 Q 240 190 270 200" stroke="#fff" stroke-width="1.5" fill="none"/>
+  
+  <!-- Laces -->
+  <g stroke="#fff" stroke-width="2" fill="none">
+    <circle cx="160" cy="160" r="3" fill="#4a5568"/>
+    <circle cx="180" cy="155" r="3" fill="#4a5568"/>
+    <circle cx="200" cy="150" r="3" fill="#4a5568"/>
+    <circle cx="220" cy="155" r="3" fill="#4a5568"/>
+    <circle cx="240" cy="160" r="3" fill="#4a5568"/>
+  </g>
+  
+  <!-- Lace strings -->
+  <g stroke="#fff" stroke-width="1.5" fill="none">
+    <path d="M 160 160 Q 180 145 200 150"/>
+    <path d="M 200 150 Q 220 145 240 160"/>
+    <path d="M 180 155 Q 200 140 220 155"/>
+  </g>
+  
+  <!-- Logo -->
+  <circle cx="220" cy="185" r="12" fill="#fff" opacity="0.9"/>
+  <text x="220" y="190" font-family="Inter, sans-serif" font-size="8" font-weight="700" text-anchor="middle" fill="#667eea">A</text>
+  
+  <!-- Heel -->
+  <path d="M 280 200 Q 290 190 295 200 Q 290 230 280 240" fill="#4a5568"/>
+  
+  <!-- Toe cap -->
+  <ellipse cx="150" cy="200" rx="35" ry="25" fill="#fff" opacity="0.2"/>
+  
+  <!-- Stitching details -->
+  <g stroke="#fff" stroke-width="1" fill="none" opacity="0.7">
+    <path d="M 110 210 Q 150 205 200 205 Q 250 205 290 210"/>
+    <path d="M 120 220 Q 160 215 200 215 Q 240 215 280 220"/>
+  </g>
+  
+  <!-- Air bubbles for premium effect -->
+  <g fill="#fff" opacity="0.3">
+    <circle cx="170" cy="230" r="2"/>
+    <circle cx="190" cy="235" r="1.5"/>
+    <circle cx="210" cy="230" r="2"/>
+    <circle cx="230" cy="235" r="1.5"/>
+  </g>
+  
+  <text x="200" y="320" font-family="Inter, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#667eea">Premium Sneakers</text>
+  <text x="200" y="340" font-family="Inter, sans-serif" font-size="12" text-anchor="middle" fill="#666">Modern Style & Comfort</text>
+</svg>

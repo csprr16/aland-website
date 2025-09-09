@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlandStore - Toko Online Modern by alandyudhistira 2025</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🛍️ AlandStore</h2>
+                <span class="nav-subtitle">by alandyudhistira 2025</span>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#products" class="nav-link">Produk</a>
+                <a href="#about" class="nav-link">Tentang</a>
+                <a href="#contact" class="nav-link">Kontak</a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="cart-icon" id="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+                <div class="user-actions" id="user-actions">
+                    <a href="/login" class="btn btn-outline">Login</a>
+                    <a href="/register" class="btn btn-primary">Daftar</a>
+                </div>
+                <div class="user-profile" id="user-profile" style="display: none;">
+                    <div class="dropdown">
+                        <button class="dropdown-btn" id="user-dropdown-btn">
+                            <i class="fas fa-user"></i>
+                            <span id="user-name">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content" id="user-dropdown">
+                            <a href="#" id="orders-link"><i class="fas fa-box"></i> Pesanan Saya</a>
+                            <a href="/admin" id="admin-link" style="display: none;"><i class="fas fa-cog"></i> Admin Panel</a>
+                            <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Selamat Datang di <span class="gradient-text">AlandStore</span>
+                </h1>
+                <p class="hero-description">
+                    Toko online modern dengan koleksi produk terbaik dan pengalaman berbelanja yang tak terlupakan. 
+                    Dibuat khusus untuk Anda dengan teknologi terdepan.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" onclick="scrollToProducts()">
+                        <i class="fas fa-shopping-bag"></i>
+                        Belanja Sekarang
+                    </button>
+                    <button class="btn btn-outline btn-large" onclick="scrollToAbout()">
+                        <i class="fas fa-info-circle"></i>
+                        Pelajari Lebih Lanjut
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-graphics">
+                    <div class="floating-card card-1">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Belanja Mudah</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-truck"></i>
+                        <span>Pengiriman Cepat</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>100% Aman</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Produk Unggulan</h2>
+                <p class="section-description">Koleksi produk terbaik dengan kualitas premium</p>
+            </div>
+            
+            <div class="products-filter">
+                <button class="filter-btn active" data-category="all">Semua</button>
+                <button class="filter-btn" data-category="Electronics">Electronics</button>
+                <button class="filter-btn" data-category="Fashion">Fashion</button>
+                <button class="filter-btn" data-category="Home">Home & Living</button>
+                <button class="filter-btn" data-category="Sports">Sports</button>
+            </div>
+            
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be loaded here -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Memuat produk...</p>
+                </div>
+            </div>
+            
+            <div class="products-actions">
+                <button class="btn btn-outline" id="load-more-btn">
+                    <i class="fas fa-plus"></i>
+                    Muat Lebih Banyak
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Tentang AlandStore</h2>
+                    <p class="about-description">
+                        AlandStore adalah toko online modern yang didirikan pada 2025 oleh alandyudhistira. 
+                        Kami berkomitmen untuk memberikan pengalaman berbelanja online terbaik dengan 
+                        produk-produk berkualitas tinggi dan layanan pelanggan yang memuaskan.
+                    </p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                            <h3>Pengiriman Cepat</h3>
+                            <p>Pengiriman ke seluruh Indonesia dengan jaminan barang sampai tepat waktu</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <h3>Kualitas Terjamin</h3>
+                            <p>Semua produk telah melalui quality control ketat untuk kepuasan Anda</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3>Support 24/7</h3>
+                            <p>Tim customer service siap membantu Anda kapan saja</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <h3>Pembayaran Aman</h3>
+                            <p>Sistem pembayaran yang aman dengan enkripsi tingkat tinggi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2 class="section-title">Hubungi Kami</h2>
+                    <p class="section-description">
+                        Ada pertanyaan? Jangan ragu untuk menghubungi kami!
+                    </p>
+                    
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email</h4>
+                                <p>support@alandstore.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Telepon</h4>
+                                <p>+62 123 456 789</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Alamat</h4>
+                                <p>Jakarta, Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="contact-name" placeholder="Nama Lengkap" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="contact-email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="contact-subject" placeholder="Subjek" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="contact-message" placeholder="Pesan Anda" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-paper-plane"></i>
+                            Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>🛍️ AlandStore</h3>
+                        <p>Toko online modern by alandyudhistira 2025</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Kategori</h4>
+                    <ul>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Fashion</a></li>
+                        <li><a href="#">Home & Living</a></li>
+                        <li><a href="#">Sports</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Layanan</h4>
+                    <ul>
+                        <li><a href="#">Bantuan</a></li>
+                        <li><a href="#">Pengiriman</a></li>
+                        <li><a href="#">Pembayaran</a></li>
+                        <li><a href="#">Retur</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Dapatkan update produk terbaru dan penawaran menarik</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Email Anda" id="newsletter-email">
+                        <button type="button" class="btn btn-primary" id="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AlandStore by alandyudhistira. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Keranjang Belanja</h3>
+            <button class="cart-close" id="cart-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Keranjang Anda masih kosong</p>
+                <button class="btn btn-primary" onclick="closeCart()">Mulai Belanja</button>
+            </div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-amount" id="total-amount">Rp 0</span>
+                </div>
+            </div>
+            <div class="cart-actions">
+                <button class="btn btn-outline btn-full" onclick="closeCart()">Lanjut Belanja</button>
+                <button class="btn btn-primary btn-full" id="checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <!-- Load configuration and API client first -->
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - AlandStore</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <h2>🛍️ AlandStore</h2>
+                    <span class="nav-subtitle">Admin Panel</span>
+                </a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="/" class="btn btn-outline">
+                    <i class="fas fa-home"></i>
+                    Beranda
+                </a>
+                <button class="btn btn-primary" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Container -->
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>Admin Panel</h1>
+            <p>Kelola produk dan pesanan AlandStore</p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="admin-nav">
+            <button class="admin-nav-btn active" data-section="dashboard">
+                <i class="fas fa-chart-line"></i>
+                Dashboard
+            </button>
+            <button class="admin-nav-btn" data-section="products">
+                <i class="fas fa-box"></i>
+                Produk
+            </button>
+            <button class="admin-nav-btn" data-section="orders">
+                <i class="fas fa-shopping-cart"></i>
+                Pesanan
+            </button>
+            <button class="admin-nav-btn" data-section="users">
+                <i class="fas fa-users"></i>
+                Pengguna
+            </button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div class="admin-section active" id="dashboard">
+            <h2>Dashboard</h2>
+            <div class="features-grid" style="margin-top: 30px;">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3>Total Produk</h3>
+                    <p id="total-products">Memuat...</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Total Pesanan</h3>
+                    <p id="total-orders">Memuat...</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Total Pengguna</h3>
+                    <p id="total-users">Memuat...</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Status Sistem</h3>
+                    <p style="color: #2ed573; font-weight: 600;">Online</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <div class="admin-section" id="products">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2>Manajemen Produk</h2>
+                <button class="btn btn-primary" onclick="showAddProductForm()">
+                    <i class="fas fa-plus"></i>
+                    Tambah Produk
+                </button>
+            </div>
+            
+            <div id="products-table">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Memuat produk...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders Section -->
+        <div class="admin-section" id="orders">
+            <h2>Manajemen Pesanan</h2>
+            <div id="orders-table">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Memuat pesanan...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Section -->
+        <div class="admin-section" id="users">
+            <h2>Manajemen Pengguna</h2>
+            <div id="users-table">
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Memuat pengguna...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Product Modal -->
+    <div class="cart-overlay" id="product-modal-overlay"></div>
+    <div class="cart-sidebar" id="product-modal" style="width: 500px;">
+        <div class="cart-header">
+            <h3 id="product-modal-title">Tambah Produk</h3>
+            <button class="cart-close" onclick="hideProductForm()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" style="padding: 30px;">
+            <form id="product-form">
+                <input type="hidden" id="product-id">
+                <div class="form-group">
+                    <label style="font-weight: 600; margin-bottom: 8px; display: block;">Nama Produk</label>
+                    <input type="text" id="product-name" placeholder="Masukkan nama produk" required>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: 600; margin-bottom: 8px; display: block;">Harga</label>
+                    <input type="number" id="product-price" placeholder="Masukkan harga" required min="0">
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: 600; margin-bottom: 8px; display: block;">Kategori</label>
+                    <select id="product-category" required style="width: 100%; padding: 16px; border: 2px solid #e1e5e9; border-radius: 12px; font-size: 16px;">
+                        <option value="">Pilih Kategori</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Home">Home & Living</option>
+                        <option value="Sports">Sports</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: 600; margin-bottom: 8px; display: block;">Stok</label>
+                    <input type="number" id="product-stock" placeholder="Masukkan jumlah stok" required min="0">
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: 600; margin-bottom: 8px; display: block;">Deskripsi</label>
+                    <textarea id="product-description" placeholder="Masukkan deskripsi produk" required rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label style="font-weight: 600; margin-bottom: 8px; display: block;">Gambar Produk</label>
+                    <input type="file" id="product-image" accept="image/*" style="width: 100%; padding: 16px; border: 2px solid #e1e5e9; border-radius: 12px;">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-save"></i>
+                    Simpan Produk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+        </div>
+    </div>
+
+    <!-- Load configuration and API client first -->
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script>
+        let currentUser = null;
+        let products = [];
+        let orders = [];
+        let users = [];
+
+        // Check admin authentication
+        function checkAdminAuth() {
+            if (!API.isAuthenticated()) {
+                window.location.href = 'login.html';
+                return false;
+            }
+            
+            currentUser = API.getCurrentUser();
+            
+            if (!currentUser || currentUser.role !== 'admin') {
+                showNotification('Akses ditolak. Anda bukan admin.', 'error');
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 2000);
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Initialize admin panel
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!checkAdminAuth()) return;
+            
+            await loadDashboardData();
+            
+            // Tab navigation
+            document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const section = btn.getAttribute('data-section');
+                    showSection(section);
+                });
+            });
+            
+            // Product form
+            document.getElementById('product-form').addEventListener('submit', handleProductSubmit);
+        });
+
+        function showSection(sectionId) {
+            // Update nav buttons
+            document.querySelectorAll('.admin-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
+            
+            // Update sections
+            document.querySelectorAll('.admin-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Load section data
+            switch(sectionId) {
+                case 'products':
+                    loadProducts();
+                    break;
+                case 'orders':
+                    loadOrders();
+                    break;
+                case 'users':
+                    loadUsers();
+                    break;
+            }
+        }
+
+        async function loadDashboardData() {
+            try {
+                const [productsRes, ordersRes, usersRes] = await Promise.all([
+                    apiRequest('/api/products'),
+                    apiRequest('/api/admin/orders'),
+                    apiRequest('/api/admin/users').catch(() => ({ length: 0 })) // Users endpoint might not exist
+                ]);
+                
+                products = productsRes;
+                orders = ordersRes || [];
+                users = usersRes || [];
+                
+                document.getElementById('total-products').textContent = products.length;
+                document.getElementById('total-orders').textContent = orders.length;
+                document.getElementById('total-users').textContent = users.length || 'N/A';
+            } catch (error) {
+                console.error('Error loading dashboard data:', error);
+                showNotification('Error memuat data dashboard', 'error');
+            }
+        }
+
+        async function loadProducts() {
+            try {
+                const result = await API.getProducts();
+                if (result.success && result.data && result.data.products) {
+                    products = result.data.products;
+                    displayProductsTable(products);
+                } else {
+                    throw new Error('Invalid response format');
+                }
+            } catch (error) {
+                console.error('Error loading products:', error);
+                document.getElementById('products-table').innerHTML = `<p>Error memuat produk: ${error.message}</p>`;
+            }
+        }
+
+        function displayProductsTable(products) {
+            const tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama</th>
+                            <th>Kategori</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${products.map(product => `
+                            <tr>
+                                <td>${product.id}</td>
+                                <td>${product.name}</td>
+                                <td>${product.category}</td>
+                                <td>${formatRupiah(product.price)}</td>
+                                <td>${product.stock}</td>
+                                <td>
+                                    <button class="btn btn-outline" style="margin-right: 8px; padding: 6px 12px;" onclick="editProduct(${product.id})">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-primary" style="background: #ff4757; padding: 6px 12px;" onclick="deleteProduct(${product.id})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            document.getElementById('products-table').innerHTML = tableHTML;
+        }
+
+        async function loadOrders() {
+            try {
+                orders = await apiRequest('/api/admin/orders');
+                displayOrdersTable(orders);
+            } catch (error) {
+                console.error('Error loading orders:', error);
+                document.getElementById('orders-table').innerHTML = '<p>Error memuat pesanan</p>';
+            }
+        }
+
+        function displayOrdersTable(orders) {
+            if (orders.length === 0) {
+                document.getElementById('orders-table').innerHTML = '<p>Belum ada pesanan</p>';
+                return;
+            }
+            
+            const tableHTML = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User ID</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Tanggal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${orders.map(order => `
+                            <tr>
+                                <td>${order.id}</td>
+                                <td>${order.userId}</td>
+                                <td>${formatRupiah(order.totalAmount)}</td>
+                                <td><span class="status-badge status-${order.status}">${order.status}</span></td>
+                                <td>${new Date(order.createdAt).toLocaleDateString('id-ID')}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            document.getElementById('orders-table').innerHTML = tableHTML;
+        }
+
+        async function loadUsers() {
+            document.getElementById('users-table').innerHTML = `
+                <div class="loading-spinner">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Fitur manajemen pengguna belum tersedia</p>
+                </div>
+            `;
+        }
+
+        function showAddProductForm() {
+            document.getElementById('product-modal-title').textContent = 'Tambah Produk';
+            document.getElementById('product-form').reset();
+            document.getElementById('product-id').value = '';
+            document.getElementById('product-modal-overlay').classList.add('show');
+            document.getElementById('product-modal').classList.add('open');
+        }
+
+        function hideProductForm() {
+            document.getElementById('product-modal-overlay').classList.remove('show');
+            document.getElementById('product-modal').classList.remove('open');
+        }
+
+        function editProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            document.getElementById('product-modal-title').textContent = 'Edit Produk';
+            document.getElementById('product-id').value = product.id;
+            document.getElementById('product-name').value = product.name;
+            document.getElementById('product-price').value = product.price;
+            document.getElementById('product-category').value = product.category;
+            document.getElementById('product-stock').value = product.stock;
+            document.getElementById('product-description').value = product.description;
+            
+            document.getElementById('product-modal-overlay').classList.add('show');
+            document.getElementById('product-modal').classList.add('open');
+        }
+
+        async function deleteProduct(productId) {
+            if (!confirm('Apakah Anda yakin ingin menghapus produk ini?')) return;
+            
+            try {
+                await apiRequest(`/api/products/${productId}`, {
+                    method: 'DELETE'
+                });
+                
+                showNotification('Produk berhasil dihapus', 'success');
+                loadProducts();
+                loadDashboardData();
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                showNotification('Gagal menghapus produk', 'error');
+            }
+        }
+
+        async function handleProductSubmit(e) {
+            e.preventDefault();
+            
+            const productId = document.getElementById('product-id').value;
+            const formData = new FormData();
+            
+            formData.append('name', document.getElementById('product-name').value);
+            formData.append('price', document.getElementById('product-price').value);
+            formData.append('category', document.getElementById('product-category').value);
+            formData.append('stock', document.getElementById('product-stock').value);
+            formData.append('description', document.getElementById('product-description').value);
+            
+            const imageFile = document.getElementById('product-image').files[0];
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+            
+            try {
+                const url = productId ? `/api/products/${productId}` : '/api/products';
+                const method = productId ? 'PUT' : 'POST';
+                
+                const response = await fetch(url, {
+                    method,
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showNotification(result.message, 'success');
+                    hideProductForm();
+                    loadProducts();
+                    loadDashboardData();
+                } else {
+                    showNotification(result.message || 'Gagal menyimpan produk', 'error');
+                }
+            } catch (error) {
+                console.error('Error saving product:', error);
+                showNotification('Terjadi kesalahan', 'error');
+            }
+        }
+
+        async function apiRequest(url, options = {}) {
+            const token = localStorage.getItem('token');
+            
+            const defaultOptions = {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            };
+            
+            if (token) {
+                defaultOptions.headers.Authorization = `Bearer ${token}`;
+            }
+            
+            const finalOptions = {
+                ...defaultOptions,
+                ...options,
+                headers: {
+                    ...defaultOptions.headers,
+                    ...options.headers
+                }
+            };
+            
+            const response = await fetch(url, finalOptions);
+            
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.message || 'Request failed');
+            }
+            
+            return await response.json();
+        }
+
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.getElementById('notification');
+            const messageEl = notification.querySelector('.notification-message');
+            const iconEl = notification.querySelector('.notification-icon');
+            
+            messageEl.textContent = message;
+            notification.className = `notification ${type}`;
+            
+            const icons = {
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle',
+                info: 'fas fa-info-circle'
+            };
+            
+            iconEl.className = `notification-icon ${icons[type] || icons.info}`;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userData');
+            showNotification('Berhasil logout', 'info');
+            setTimeout(() => {
+                window.location.href = '/';
+            }, 1500);
+        }
+
+        // Close modal when clicking overlay
+        document.getElementById('product-modal-overlay').addEventListener('click', hideProductForm);
+    </script>
+</body>
+</html>
