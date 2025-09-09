@@ -1,86 +1,19 @@
 [build]
-  # Build settings
   publish = "frontend"
   functions = "netlify/functions"
-  
-  # Build command (optional - since we're using static files)
-  # command = "npm run build"
 
-  # Environment variables for build process
-  [build.environment]
-    NODE_VERSION = "18"
-    NPM_VERSION = "9"
+[build.environment]
+  NODE_VERSION = "18"
 
-# Production context (default)
-[context.production]
-  publish = "frontend"
-  
-  # Production environment variables
-  [context.production.environment]
-    NODE_ENV = "production"
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
-# Deploy preview context
-[context.deploy-preview]
-  publish = "frontend"
-  
-  [context.deploy-preview.environment]
-    NODE_ENV = "staging"
-
-# Branch deploy context
-[context.branch-deploy]
-  publish = "frontend"
-  
-  [context.branch-deploy.environment]
-    NODE_ENV = "development"
-
-# Redirects
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
 
-# Legacy API redirects
-[[redirects]]
-  from = "/api/login"
-  to = "/.netlify/functions/login"
-  status = 200
-
-[[redirects]]
-  from = "/api/register"  
-  to = "/.netlify/functions/register"
-  status = 200
-
-[[redirects]]
-  from = "/api/products"
-  to = "/.netlify/functions/products"
-  status = 200
-
-[[redirects]]
-  from = "/api/products-create"
-  to = "/.netlify/functions/products-create"
-  status = 200
-
-[[redirects]]
-  from = "/api/products-manage/*"
-  to = "/.netlify/functions/products-manage/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/api/orders"
-  to = "/.netlify/functions/orders"
-  status = 200
-
-[[redirects]]
-  from = "/api/orders-create"
-  to = "/.netlify/functions/orders-create"
-  status = 200
-
-[[redirects]]
-  from = "/api/orders-manage/*"
-  to = "/.netlify/functions/orders-manage/:splat"
-  status = 200
-
-# Route redirects for SPA
 [[redirects]]
   from = "/login"
   to = "/pages/login.html"
@@ -96,118 +29,21 @@
   to = "/pages/admin.html"
   status = 200
 
-# SPA fallback for client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Functions configuration
-[functions]
-  # Directory where functions are located
-  directory = "netlify/functions"
-  
-  # Node.js version for functions
-  node_bundler = "esbuild"
-  
-  # Include external dependencies
-  external_node_modules = ["bcryptjs", "jsonwebtoken"]
-  
-  # Function timeout (max 10 seconds for free tier)
-  timeout = 10
-
-# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
-    # Security headers
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
-    
-    # Content Security Policy
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: http:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
-    
-    # Cache control for static assets
-    Cache-Control = "public, max-age=31536000, immutable"
 
-# API endpoints headers
 [[headers]]
   for = "/.netlify/functions/*"
   [headers.values]
-    # CORS headers for API
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type, Authorization, X-Requested-With"
-    Access-Control-Max-Age = "86400"
-    
-    # Security headers for API
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    
-    # No cache for API responses
-    Cache-Control = "no-cache, no-store, must-revalidate"
-    Pragma = "no-cache"
-    Expires = "0"
-
-# HTML files headers
-[[headers]]
-  for = "*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=3600, must-revalidate"
-
-# CSS and JS files headers
-[[headers]]
-  for = "*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "text/css"
-
-[[headers]]
-  for = "*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Content-Type = "application/javascript"
-
-# Image files headers
-[[headers]]
-  for = "*.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "*.svg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# Local development configuration
-[dev]
-  framework = "#custom"
-  command = "npm run dev"
-  targetPort = 3000
-  port = 8888
-  publish = "frontend"
-  autoLaunch = false
-  
-  [dev.env]
-    NODE_ENV = "development"
-    API_BASE_URL = "http://localhost:3000/api"
-
-# Edge functions (if needed in future)
-# [[edge_functions]]
-#   function = "auth-check"
-#   path = "/admin/*"
-
-# Form handling (if needed)
-# [[forms]]
-#   name = "contact"
-#   action = "/thank-you"
-#   method = "POST"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
