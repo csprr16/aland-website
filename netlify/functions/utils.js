@@ -114,7 +114,42 @@ function validateEmail(email) {
   return re.test(email);
 }
 
+function validatePassword(password) {
+  if (!password || typeof password !== 'string') {
+    return { isValid: false, error: 'Password is required' };
+  }
+
+  if (password.length < 6) {
+    return { isValid: false, error: 'Password must be at least 6 characters long' };
+  }
+
+  if (password.length > 128) {
+    return { isValid: false, error: 'Password must be less than 128 characters' };
+  }
+
+  // Check for at least one number or special character
+  const hasNumberOrSpecial = /[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+  if (!hasNumberOrSpecial) {
+    return { isValid: false, error: 'Password must contain at least one number or special character' };
+  }
+
+  return { isValid: true };
+}
+
 function checkRateLimit(clientIP, endpoint, maxRequests = 5, windowMs = 15 * 60 * 1000) {
+  // Skip rate limiting in development or for localhost
+  const isDevelopment = process.env.NODE_ENV === 'development' || 
+                       process.env.NETLIFY_DEV === 'true' ||
+                       clientIP === 'localhost' || 
+                       clientIP === '127.0.0.1' ||
+                       clientIP === '::1' ||
+                       clientIP.includes('netlify');
+  
+  if (isDevelopment) {
+    console.log(`[DEV] Rate limiting bypassed for ${clientIP} on ${endpoint}`);
+    return true;
+  }
+
   const key = `${clientIP}:${endpoint}`;
   const now = Date.now();
   const windowStart = now - windowMs;
@@ -127,12 +162,25 @@ function checkRateLimit(clientIP, endpoint, maxRequests = 5, windowMs = 15 * 60 
   const validRequests = requests.filter(timestamp => timestamp > windowStart);
   
   if (validRequests.length >= maxRequests) {
+    console.log(`[RATE LIMIT] Blocked ${clientIP} on ${endpoint}. ${validRequests.length}/${maxRequests} requests`);
     return false;
   }
   
   validRequests.push(now);
   rateLimitStore.set(key, validRequests);
+  console.log(`[RATE LIMIT] Allowed ${clientIP} on ${endpoint}. ${validRequests.length}/${maxRequests} requests`);
   return true;
+}
+
+function clearRateLimit(clientIP, endpoint) {
+  const key = `${clientIP}:${endpoint}`;
+  rateLimitStore.delete(key);
+  console.log(`[RATE LIMIT] Cleared rate limit for ${clientIP} on ${endpoint}`);
+}
+
+function clearAllRateLimits() {
+  rateLimitStore.clear();
+  console.log('[RATE LIMIT] Cleared all rate limits');
 }
 
 function handleCORS(event) {
@@ -199,7 +247,10 @@ module.exports = {
   BCRYPT_SALT_ROUNDS,
   sanitizeInput,
   validateEmail,
+  validatePassword,
   checkRateLimit,
+  clearRateLimit,
+  clearAllRateLimits,
   handleCORS,
   verifyToken,
   createResponse,

@@ -26,10 +26,10 @@ exports.handler = async (event, context) => {
   try {
     const clientIP = event.headers['client-ip'] || event.headers['x-forwarded-for'] || 'unknown';
     
-    // Rate limiting for login attempts
-    if (!checkRateLimit(clientIP, 'login', 5, 15 * 60 * 1000)) {
+    // Rate limiting for login attempts - 10 attempts per 15 minutes
+    if (!checkRateLimit(clientIP, 'login', 10, 15 * 60 * 1000)) {
       logSecurityEvent(event, 'Rate limit exceeded for login', { ip: clientIP });
-      return createErrorResponse(429, 'Too many login attempts, please try again later.');
+      return createErrorResponse(429, 'Terlalu banyak percobaan login. Silakan coba lagi dalam 15 menit.');
     }
 
     // Parse request body
